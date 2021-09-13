@@ -6,7 +6,10 @@ def compare_tags(tags1, tags2):
     return missing_tags
 
 def concat_tag(tag):
-    return f'{tag["tag"]}:{tag["scope"]}'
+    if tag["scope"] != "":
+        return f'{tag["tag"]}:{tag["scope"]}'
+    else:
+        return f'{tag["tag"]}'
 
 def concat_tags(tags):
     return "\n".join([concat_tag(tag) for tag in tags])
