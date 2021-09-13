@@ -24,7 +24,7 @@ for src_vm in src_vms_with_tags:
             missing_tags = compare_tags(src_vm["tags"], dest_vm["tags"])
         else:
             missing_tags = src_vm["tags"]
-        if missing_tags or 'tags' not in dest_vm:
+        if missing_tags:
             #If missing tags found or no tags key exists in dest, sync them
             print(f"Syncing new tags found for {dest_vm['display_name']}:")
             print(concat_tags(missing_tags))
