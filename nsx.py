@@ -5,10 +5,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)    
 
 class nsx_manager:
-    def __init__(self):
-        self.connected = False
-
-    def connect(self, address, username, password):
+    def __init__(self, address, username, password):
         self.address = address
         self.base_url = f"https://{address}"
 
@@ -22,7 +19,6 @@ class nsx_manager:
         else:
             print(f"Connected to NSX manager {address}.")
 
-        self.connected = True
         self.session = s
         self.x_xsrf_token = r.headers["X-XSRF-TOKEN"]
 
@@ -58,4 +54,13 @@ class nsx_manager:
         }
 
         r = self.__send_req('POST','/api/v1/fabric/virtual-machines?action=add_tags',data)
+        return r
+
+    def clear_tags(self, vm, tags):
+        data = {
+            'external_id': vm["external_id"],
+            'tags': []
+        }
+
+        r = self.__send_req('POST','/api/v1/fabric/virtual-machines?action=update_tags',data)
         return r
