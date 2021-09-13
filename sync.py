@@ -22,6 +22,7 @@ for src_vm in src_vms_with_tags:
         #Check if tags key is present at all (blank or otherwise)
         if 'tags' in dest_vm: 
             missing_tags = compare_tags(src_vm["tags"], dest_vm["tags"])
+            tags_not_on_src = compare_tags(dest_vm["tags"], src_vm["tags"])
         else:
             missing_tags = src_vm["tags"]
         if missing_tags:
@@ -30,3 +31,9 @@ for src_vm in src_vms_with_tags:
             print(concat_tags(missing_tags))
             print("")
             nsx_dest.add_tags(dest_vm, missing_tags)
+        if tags_not_on_src:
+            #If tags found on dest that are no longer on src, remove them
+            print(f"Removing old tags found for {dest_vm['display_name']}:")
+            print(concat_tags(tags_not_on_src))
+            print("")
+            nsx_dest.remove_tags(dest_vm, tags_not_on_src)

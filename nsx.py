@@ -64,3 +64,12 @@ class nsx_manager:
 
         r = self.__send_req('POST','/api/v1/fabric/virtual-machines?action=update_tags',data)
         return r
+
+    def remove_tags(self, vm, tags):
+        data = {
+            'external_id': vm["external_id"],
+            'tags': tags
+        }
+
+        r = self.__send_req('POST','/api/v1/fabric/virtual-machines?action=remove_tags',data)
+        return r
