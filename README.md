@@ -1,10 +1,10 @@
-# NSX-T Tag Syncronizer
+# NSX Tag Synchronizer
 
 A Python program that syncronizes NSX-T tags between VMs in a local manager with their SRM (VMware Site Reliability Manager) placeholder counterparts in another local manager. It matches VMs simply using the display name of the VM.
 
 Run this program using a scheduler on a frequency of your choice (ex. every hour)
 
-**note this program currently only supports basic auth**
+**note this program currently only supports basic auth and only supports NSX-T**
 
 ## Usage
 
